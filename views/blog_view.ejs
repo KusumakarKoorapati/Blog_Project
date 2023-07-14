@@ -1,0 +1,103 @@
+<%-include('header') %>
+
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+      <!-- Bootstrap Dark Table -->
+      <div class="card">
+        <h5 class="card-header">Table Dark</h5>
+        <div class="table-responsive text-nowrap">
+          <form action="">
+            <div class="d-flex my-3">
+              <input class="form-control" name="search" type="text" placeholder="Search..">
+              <input type="submit" value="search" name="searching" class="mx-2">
+          </div>
+          </form>
+          <form action="/blog/mulDel" method="post" enctype="multipart/form-data">
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="multidelet">
+                  <input type="submit" value="DeleteRecord">
+              </th>
+                <th>Title</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Content</th>
+                <th>Category</th>
+                <th>Image</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+              <% for(var bd of blogData){ %>
+                <tr>
+                  <td><input type="checkbox" name="mulDel[]" class="singleDelet" value="<%= bd.id %>"></td>
+                  <td><i class="fab fa-angular fa-lg text-danger me-3"></i><strong>
+                      <%=bd.title %>
+                    </strong></td>
+                  <td>
+                    <%=bd.name %>
+                  </td>
+                  <td>
+                    <%=bd.date %>
+                  </td>
+                  <td>
+                    <%=bd.content %>
+                  </td>
+                  <td>
+                    <%=bd.category %>
+                  </td>
+                  <td><img src="<%=bd.image %>" height="50" width="50"></td>
+                  <td>
+                    <a href="/blog/DeleteRecord/<%=bd.id%>" class="btn btn-danger btn-sm"><i
+                        class="fa-solid fa-trash " style="font-size: 20px; margin-right: 8px;"></i></a>
+                    <a href="/blog/UpdateRecord/<%=bd.id%>" class="btn btn-primary btn-sm"><i
+                        class="fa-solid fa-pen-to-square" style="font-size: 20px; margin-right: 8px;"></i></a>
+                    <!-- Active -->
+                    <% if(bd.isActive){ %>
+                      <a href="?id=<%= bd.id %>&status=deActive&search=<%= search %>&page=<%= cpage %>"><i
+                          class="fa-regular fa-circle-check" style="color: rgb(101, 187, 16); font-size: 20px;"></i></a>
+                      <% }else{ %>
+                        <!-- deActive -->
+                        <a href="?id=<%= bd.id %>&status=Active&search=<%= search %>&page=<%= cpage %>"><i
+                            class="fa-regular fa-circle-check" style="font-size: 20px;"></i> </a>
+                        <% } %>
+                  </td>
+                </tr>
+                <% } %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>
+                  <% var pagenum=cpage %>
+
+                    <% var pre=--pagenum %>
+                      <% if(pre>0) {%>
+                        <a href="?page=<%= pre%>&search=<%= search %>">
+                          <<< </a>
+                            <% } %>
+                              <a href="<%= cpage%>&search=<%= search %>">
+                                <%=cpage%>
+                              </a>
+                              <% var next=++cpage %>
+
+                                <% if(cpage<=pageNum){ %>
+                                  <a href="?page=<%= next %>&search=<%= search %>">
+                                    >>> </a>
+                                  <% } %>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </form>
+        </div>
+      </div>
+      <!--/ Bootstrap Dark Table -->
+    </div>
+    <%-include('footer') %>

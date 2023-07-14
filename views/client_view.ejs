@@ -1,0 +1,78 @@
+<%-include('header') %>
+
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+      <!-- Bootstrap Dark Table -->
+      <div class="card">
+        <h5 class="card-header">Table Dark</h5>
+        <div class="table-responsive text-nowrap">
+          <form action="">
+          </form>
+          <form action="/client/mulDel" method="post" enctype="multipart/form-data">
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="multidelet">
+                  <input type="submit" value="DeleteRecord">
+              </th>
+                <th>Image</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+                <% for(var cd of clientData){ %>
+                    <tr>
+                        <td><input type="checkbox" name="mulDel[]" class="singleDelet" value="<%= cd.id %>"></td>
+                        <td><img src="<%=cd.image%>" height="100" width="150" alt=""></td>
+                        <td>
+                            <a href="/client/delet/<%= cd.id %>"><i class="fa-solid fa-trash " style="font-size: 20px; margin-right: 8px;"></i></a>
+                            <a href="/client/edit_page/<%= cd.id %>"><i class="fa-solid fa-pen-to-square" style="font-size: 20px; margin-right: 8px;"></i></a>
+                           <% if(cd.isActive){ %>
+                            <a href="?id=<%= cd.id %>&page=<% cpage %>&status=deActive"><i class="fa-regular fa-circle-check" style="color: rgb(101, 187, 16); font-size: 20px;"></i></a>
+                            <% }else{ %>
+                            <a href="?id=<%= cd.id %>&page=<% cpage %>&status=Active"><i class="fa-regular fa-circle-check" style="font-size: 20px;"></i> </a>
+                                <% } %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+            <tfoot>
+              <!-- <tr>
+                <th>title</th>
+                <th>content</th>
+                <th>image</th>
+                <th>operation</th>
+              </tr> -->
+              <tr>
+                <td >
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+
+                            <% var cu_page=cpage;var pre=--cu_page; %>
+                            <% if(pre>0){ %>
+                            <li class="page-item"><a class="page-link" href="?page=<%= pre %>">Previous</a></li>
+                            <% } %>
+                            <% for(var i=1;i<=page_num;i++){ %>
+                            <li class="page-item <% if(cpage==i){ %><%= 'active' %><% } %>"><a class="page-link active" href="#"><%= i %></a></li>
+                            <% } %>
+                            <% var next=++cpage %>
+                            <% if(next<=page_num){ %>
+                                <li class="page-item"><a class="page-link" href="?page=<%= next %>">Next</a></li>
+                                <% } %>
+                        </ul>
+                    </nav>
+            </tr>
+            </tfoot>
+          </table>
+        </form>
+        </div>
+      </div>
+      <!--/ Bootstrap Dark Table -->
+    </div>
+    <%-include('footer') %>

@@ -1,0 +1,106 @@
+<%-include('header') %>
+
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+      <!-- Bootstrap Dark Table -->
+      <div class="card">
+        <h5 class="card-header">Table Dark</h5>
+        <div class="table-responsive text-nowrap">
+          <form action="">
+            <div class="d-flex my-3">
+              <input class="form-control" name="search" type="text" placeholder="Search..">
+              <input type="submit" value="search" name="searching" class="mx-2">
+          </div>
+          </form>
+          <form action="/comment/mulDel" method="post" enctype="multipart/form-data">
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="multidelet">
+                  <input type="submit" value="DeleteRecord">
+              </th>
+              <th>post</th>
+              <th>image</th>
+              <th>name</th>
+              <th>date</th>
+              <th>Comment</th>
+              <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+              <% for(var ct of comment){ %>
+                <tr>
+                  <td><input type="checkbox" name="mulDel[]" class="singleDelet" value="<%= sd.id %>"></td>
+                  <td><i class="fab fa-angular fa-lg text-danger me-3"></i><strong>
+                      <!-- <%=ct.post %> -->
+                      <%=ct.post_id.title%>
+                    </strong></td>
+                  <td><img src="<%=ct.image %>" height="50" width="50"></td>
+                  <td>
+                    <%=ct.name %>
+                  </td>
+                  <td>
+                    <%=ct.date %>
+                  </td>
+                  <td>
+                    <%=ct.comment %>
+                  </td>
+                  <td>
+                    <a href="/comment/DeleteRecord/<%=ct.id%>" class="btn btn-danger btn-sm"><i
+                        class="fa-solid fa-trash " style="font-size: 20px; margin-right: 8px;"></i></a>
+                    <a href="/comment/UpdateRecord/<%=ct.id%>" class="btn btn-primary btn-sm"><i
+                        class="fa-solid fa-pen-to-square" style="font-size: 20px; margin-right: 8px;"></i></a>
+                    <!-- Active -->
+                    <% if(sd.isActive){ %>
+                      <a href="?id=<%= ct.id %>&status=deActive&search=<%= search %>&page=<%= cpage %>"><i
+                          class="fa-regular fa-circle-check" style="color: rgb(101, 187, 16); font-size: 20px;"></i></a>
+                      <% }else{ %>
+                        <!-- deActive -->
+                        <a href="?id=<%= ct.id %>&status=Active&search=<%= search %>&page=<%= cpage %>"><i
+                            class="fa-regular fa-circle-check" style="font-size: 20px;"></i> </a>
+                        <% } %>
+                  </td>
+                </tr>
+                <% } %>
+            </tbody>
+            <tfoot>
+              <!-- <tr>
+                <th>title</th>
+                <th>content</th>
+                <th>image</th>
+                <th>operation</th>
+              </tr> -->
+              <tr>
+                <td>
+                  <% var pagenum=cpage %>
+
+                    <% var pre=--pagenum %>
+                      <% if(pre>0) {%>
+                        <a href="?page=<%= pre%>&search=<%= search %>">
+                          <<< </a>
+                            <% } %>
+                              <a href="<%= cpage%>&search=<%= search %>">
+                                <%=cpage%>
+                              </a>
+                              <% var next=++cpage %>
+
+                                <% if(cpage<=pageNum){ %>
+                                  <a href="?page=<%= next %>&search=<%= search %>">
+                                    >>> </a>
+                                  <% } %>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </form>
+        </div>
+      </div>
+      <!--/ Bootstrap Dark Table -->
+    </div>
+    <%-include('footer') %>

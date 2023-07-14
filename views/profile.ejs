@@ -1,0 +1,35 @@
+
+<%-include('header') %>
+<div class="col-md-6 mx-auto mt-3">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-user"></i>
+            <strong class="card-title pl-2">Profile Card</strong>
+        </div>
+        <div class="card-body">
+            <div class="mx-auto d-block">
+                <img class="rounded-circle mx-auto d-block" src="<%= locals.admins.image %>" alt="Card image cap" height="100" width="100">
+                <h5 class="text-sm-center mt-2 mb-1"><%= locals.admins.name %></h5>
+                <div class="location text-sm-center">
+                    <i class="fa-solid fa-location-dot"></i> <%= locals.admins.city %></div>
+            </div>
+            <hr>
+            <div class="card-text text-sm-center">
+                <a href="#" class="me-2">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="#" class="me-2">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="#" class="me-2">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="#" class="me-2">
+                    <i class="fa-brands fa-pinterest"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-include('footer') %>

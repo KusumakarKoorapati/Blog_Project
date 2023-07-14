@@ -1,0 +1,48 @@
+<%-include('header') %>"
+        
+
+              <h4 class="fw-bold py-3 mb-4 ms-5"><span class="text-muted fw-light">Forms /</span> Basic Inputs</h4>
+                <!-- Form controls -->
+              <form method="post" action="/blog/insertRecornd" enctype="multipart/form-data">
+                <div class="col-md-6 ms-5">
+                  <div class="card mb-4">
+                    <h5 class="card-header">Form Controls</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="defaultFormControlInput" class="form-label">Title</label>
+                            <input type="text" class="form-control" name="title" id="defaultFormControlInput" placeholder="John Doe"aria-describedby="defaultFormControlHelp"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="defaultFormControlInput" class="form-label">Category</label>
+                            <!-- <input type="text" class="form-control" name="category" id="defaultFormControlInput" placeholder="John Doe"aria-describedby="defaultFormControlHelp"/> -->
+                            <div class="form-group">
+                              <select name="category" class="form-control" id="defaultFormControlInput">
+                                  <% var category=["news","sport","i.t","game"] %>
+                                      <option selected>select category</option>
+                                      <% category.forEach(element=>{%>
+                                          <option value="<%= element%> ">
+                                              <%= element%>
+                                          </option>
+                                          <% }); %>
+                              </select>
+                          </div>
+                        </div>
+                        <div>
+                            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="content" rows="3"></textarea>
+                        </div>
+                      <div class="mb-3">
+                        <label for="formFile" class="form-label">Image</label>
+                        <input class="form-control" type="file" name="image" id="formFile"/>
+                      </div>
+                    
+                      <div class="mt-3">
+                        <input type="submit" value="Add Blog" name="submit" class="btn btn-danger">
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+           <%-include('footer') %>

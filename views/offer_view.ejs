@@ -1,0 +1,99 @@
+<%-include('header') %>
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+            <!-- Bootstrap Dark Table -->
+            <div class="card">
+                <h5 class="card-header">Table Dark</h5>
+                <div class="table-responsive text-nowrap">
+                    <form action="">
+                        <div class="d-flex my-3">
+                            <input class="form-control" name="search" type="text" placeholder="Search..">
+                            <input type="submit" value="search" name="searching" class="mx-2">
+                        </div>
+                    </form>
+                    <form action="/offer/mulDel" method="post">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="multidelet">
+                                        <input type="submit" value="DeleteRecord">
+                                    </th>
+                                    <th>Title</th>
+                                    <th>content</th>
+                                    <th>Icon</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                <% for(var fd of offerdata){ %>
+                                    <tr>
+                                        <td><input type="checkbox" name="mulDel[]" class="singleDelet"
+                                                value="<%= fd.id %>"></td>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i><strong>
+                                                <%=fd.title %>
+                                            </strong></td>
+                                        <td>
+                                            <%=fd.content %>
+                                        </td>
+                                        <td><i class="<%=fd.icon %>"></i></td>
+                                        <td>
+                                            <a href="/offer/DeleteRecord/<%= fd.id %>"><i class="fa-solid fa-trash "
+                                                    style="font-size: 20px; margin-right: 8px;"></i></a>
+                                            <a href="/offer/UpdateRecord/<%= fd.id %>"><i
+                                                    class="fa-solid fa-pen-to-square"
+                                                    style="font-size: 20px; margin-right: 8px;"></i></a>
+                                            <% if(fd.isActive){ %>
+                                            <a href="?id=<%= fd.id %>&page=<% cpage %>&search=<%= search %>&status=deActive"><i class="fa-regular fa-circle-check" style="color: rgb(101, 187, 16); font-size: 20px;"></i></a>
+                                            <% }else{ %>
+                                            <a href="?id=<%= fd.id %>&page=<% cpage %>&search=<%= search %>&status=Active"><i class="fa-regular fa-circle-check" style="font-size: 20px;"></i> </a>
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="multidelet">
+                                        <button type="submit" class=" bg-transparent" style="border: none ; font-size: 18px;" value="delet"><i class="fa-solid fa-trash-can"></i></button>
+                                    </th>
+                                    <!-- <th>title</th>
+                                    <th>content</th>
+                                    <th>image</th>
+                                    <th>operation</th> -->
+
+                                </tr>
+                                <tr>
+                                    <td >
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+
+                                                <% var cu_page=cpage;var pre=--cu_page; %>
+                                                <% if(pre>0){ %>
+                                                <li class="page-item"><a class="page-link" href="?page=<%= pre %>&search=<%= search  %>">Previous</a></li>
+                                                <% } %>
+                                                <% for(var i=1;i<=page_num;i++){ %>
+                                                <li class="page-item <% if(cpage==i){ %><%= 'active' %><% } %>"><a class="page-link active" href="#"><%= i %></a></li>
+                                                <% } %>
+                                                <% var next=++cpage %>
+                                                <% if(next<=page_num){ %>
+                                                    <li class="page-item"><a class="page-link" href="?page=<%= next %>&search=<%= search  %>">Next</a></li>
+                                                    <% } %>
+                                            </ul>
+                                        </nav>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <!--/ Bootstrap Dark Table -->
+        </div>
+        <%-include('footer') %>

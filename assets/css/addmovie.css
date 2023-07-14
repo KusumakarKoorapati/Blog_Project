@@ -1,0 +1,43 @@
+body{
+    background-color:gray;
+    color: bisque;
+}
+.main{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: black;
+    /* margin: 20px; */
+    padding: 30px;
+}
+.w-5{
+    width:50%;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+a{
+    list-style: none;
+    text-decoration: none;
+}
+.view a{
+    height: 20px ;
+    width: 100px;
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: blue;
+    color:white ;
+    margin: 10px;
+}
+.admin a{
+    height: 40px ;
+    width: 100px;
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: blue;
+    color:white ;
+    margin: 10px;
+}
